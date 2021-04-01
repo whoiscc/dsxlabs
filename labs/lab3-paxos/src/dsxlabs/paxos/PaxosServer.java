@@ -50,17 +50,6 @@ but reordering may still happen, which means, PaxosServer make decisions in the 
 ShardStoreServer out of order so they are not executing in the same order.
 */
 /*
-Read carefully and think deeply for the following sentence from README:
-
-The easiest way to avoid deadlock is to have your servers *reject any prepare
-requests when they cannot acquire locks* and cause the transaction to abort.
-This could lead to livelock if concurrent transactions continually cause each
-other to abort.
-
-...and the truth you may notice from test code and logs that during liveness tests different clients never share keys (client1's keys
-are all prefixed with "key-client1", etc.), figure out what it is implying and how to simplify design according to it.
-*/
-/*
 Although it is made into this joke, it is true that a fast (under unreliable network) Paxos is required. If you are sure that:
 * ShardStoreServer never stuck
 * they are not doing duplicated works more than 3 times (because 3 servers in a group may propose at the same time)
