@@ -45,6 +45,11 @@ Honor  Code  may  be  sufficient  cause  for  expulsion  from  the  University.
 */
 
 /*
+When sending messages between ShardStoreServer and its subnode PaxosServer, it should never drop packets (according to README),
+but reordering may still happen, which means, PaxosServer make decisions in the same order, but the decisions are sending to
+ShardStoreServer out of order so they are not executing in the same order.
+*/
+/*
 Read carefully and think deeply for the following sentence from README:
 
 The easiest way to avoid deadlock is to have your servers *reject any prepare
